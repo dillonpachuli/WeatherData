@@ -15,7 +15,10 @@ public class WeatherData
     public void cleanData(double lower, double upper){
         for (int i = 0; i < temperatures.size(); i++){
             double temp = temperatures.get(i);
-            if (temp < lower || temp > upper) temperatures.remove(i);
+            if (temp < lower || temp > upper){
+                temperatures.remove(i);
+                i--;
+            }
         }
     }
 
@@ -24,8 +27,18 @@ public class WeatherData
     * part (b)
     * Precondition: There is at least one heat wave in temperatures based on threshold.
     */
-    public int longestHeatWave(double threshold)
-    { /* to be implemented in part (b) */ }
+    public int longestHeatWave(double threshold){
+        int heatwave = 0;
+        int max = 0;
+        for (double t: temperatures){
+            if (t > threshold) {
+                heatwave++;
+                if (heatwave > max) max = heatwave;
+            }
+            else heatwave = 0;
+        }
+        return max;
+    }
     
     // There may be instance variables, constructors, and methods that are not shown.
 
